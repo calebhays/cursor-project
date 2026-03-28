@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "CommonJS",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "exactOptionalPropertyTypes": false
+    },
+    "include": [
+      "playwright.config.ts",
+      "tsconfig.json",
+      "e2e/**/*.ts",
+      "api/**/*.ts"
+    ]
+  }
