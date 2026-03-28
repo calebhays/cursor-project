@@ -11,6 +11,8 @@
     },
     "include": [
       "playwright.config.ts",
-      "e2e/**/*.ts"
+      "tsconfig.json",
+      "e2e/**/*.ts",
+      "api/**/*.ts"
     ]
   }
