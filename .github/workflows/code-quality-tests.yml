@@ -26,9 +26,6 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    - name: Build Shared Package
-      run: npm run build --workspace=shared
-
     - name: Run All Tests
       run: npm run test
       env:
