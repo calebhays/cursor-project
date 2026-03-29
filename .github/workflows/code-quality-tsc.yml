@@ -1,5 +1,7 @@
 name: "Code Quality: Type Check"
-on: [push, pull_request]
+on: 
+  pull_request:
+    branches: [ main ]
 
 jobs:
   type-check:
