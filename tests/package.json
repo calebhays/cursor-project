@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "dependencies": {
+    "@my-app/shared": "*"
+  },
   "scripts": {
     "test": "playwright test",
     "test:api": "playwright test --project=api-tests",
