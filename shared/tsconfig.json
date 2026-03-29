@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "Bundler",
+      "lib": ["ESNext"],
+      "declaration": true,                /* Generates .d.ts files for other workspaces */
+      "declarationMap": true,             /* Allows 'Go to Definition' to jump to source code */
+      "sourceMap": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true,
+      
+      /* The "Zod Fix" Flags */
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,               /* Stops TS from complaining about Zod's internal files */
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": ["src/**/*"],              /* Only check your source code */
+    "exclude": ["node_modules", "dist"]
+  }
