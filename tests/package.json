@@ -12,7 +12,7 @@
     "test:e2e": "playwright test --project=e2e-chromium",
     "test:ui": "playwright test --ui",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

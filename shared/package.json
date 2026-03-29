@@ -8,6 +8,6 @@
   },
   "scripts": {
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts"
+    "lint": "eslint ."
   }
 }
