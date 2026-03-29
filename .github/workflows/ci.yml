@@ -1,9 +1,5 @@
-name: CI
-on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+name: Code Quality: Tests
+on: [pull_request]
 
 jobs:
   test:
