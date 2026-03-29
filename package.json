@@ -9,6 +9,8 @@
     "tests"
   ],
   "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "type-check": "npm run type-check --workspaces --if-present",
     "dev:frontend": "npm run dev --workspace=frontend",
     "dev:backend": "npm run dev --workspace=backend",
     "test": "npm run test --workspace=tests",
