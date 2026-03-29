@@ -5,7 +5,8 @@
   "workspaces": [
     "frontend",
     "backend",
-    "shared"
+    "shared",
+    "tests"
   ],
   "scripts": {
     "dev:frontend": "npm run dev --workspace=frontend",
