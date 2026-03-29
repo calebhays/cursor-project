@@ -1,0 +1,19 @@
+name: "Code Quality: Type Check"
+on: [ pull_request ]
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Type Check All Workspaces
+        # This runs 'tsc --noEmit' in every workspace that has the script
+        run: npm run type-check

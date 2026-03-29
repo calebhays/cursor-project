@@ -2,6 +2,7 @@
   "name": "cursor-project",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "frontend",
     "backend",
@@ -9,11 +10,18 @@
     "tests"
   ],
   "scripts": {
+    "lint": "npm run lint --workspaces --if-present",
+    "type-check": "npm run type-check --workspaces --if-present",
     "dev:frontend": "npm run dev --workspace=frontend",
     "dev:backend": "npm run dev --workspace=backend",
     "test": "npm run test --workspace=tests",
     "test:api": "npm run test:api --workspace=tests",
     "test:e2e": "npm run test:e2e --workspace=tests",
     "test:ui": "npm run test:ui --workspace=tests"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "typescript-eslint": "^8.57.2"
   }
 }
