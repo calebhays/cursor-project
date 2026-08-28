@@ -1,0 +1,42 @@
+name: Tests Backend
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  tests-backend:
+    name: Run Backend Tests
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Backend Tests
+        env:
+          CI: true
+          BASE_URL: ${{ secrets.BASE_URL }}
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+        run: npx playwright test --project=api-tests
+        working-directory: ./tests
+
+      - name: Upload Backend Test Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-api-report
+          path: tests/playwright-report/
+          retention-days: 14

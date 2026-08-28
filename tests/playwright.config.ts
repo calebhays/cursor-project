@@ -1,7 +1,50 @@
 import { defineConfig, devices } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Reconstruct __dirname for ES module scope
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Native env file parsing when running locally (skips in CI)
+if (!process.env.CI) {
+  const environment = process.env.ENV || 'dev';
+  // Point to the 'envs' subfolder as shown in your directory tree
+  const envPath = path.resolve(__dirname, 'envs', `local-${environment}.env`);
+
+  if (fs.existsSync(envPath)) {
+    const envConfig = fs.readFileSync(envPath, 'utf-8');
+    envConfig.split(/\r?\n/).forEach((line) => {
+      const trimmed = line.trim();
+      if (trimmed && !trimmed.startsWith('#')) {
+        const [key, ...values] = trimmed.split('=');
+        let val = values.join('=').trim();
+        val = val.replace(/^["']|["']$/g, '').trim();
+
+        if (key && !process.env[key.trim()]) {
+          process.env[key.trim()] = val;
+        }
+      }
+    });
+  } else {
+    throw new Error(`[CONFIG ERROR] Environment file not found at: ${envPath}`);
+  }
+}
+
+// Strictly pull from process.env (loaded from env file locally or GitHub Secrets/Vars in CI)
+const BASE_URL = process.env.BASE_URL?.trim();
+const BACKEND_URL = process.env.BACKEND_URL?.trim();
+
+// Fail immediately with a clear message if values are missing
+if (!BASE_URL) {
+  throw new Error('BASE_URL environment variable is missing. Check your local-*.env file or GitHub Secrets.');
+}
+if (!BACKEND_URL) {
+  throw new Error('BACKEND_URL environment variable is missing. Check your local-*.env file or GitHub Secrets.');
+}
 
 export default defineConfig({
-  // Point to the base of your test folders
   testDir: './', 
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
@@ -10,42 +53,37 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    // Vite's default URL
-    baseURL: 'http://localhost:5173',
+    baseURL: BASE_URL,
     trace: 'on-first-retry',
   },
 
   projects: [
-    // 1. E2E Project - Runs browser tests in the 'e2e' folder
     {
       name: 'e2e-chromium',
       testDir: './e2e',
       use: { ...devices['Desktop Chrome'] },
     },
-
-    // 2. API Project - Runs tests in the 'api' folder (no browser needed)
     {
       name: 'api-tests',
       testDir: './api',
       use: {
-        baseURL: 'http://localhost:3001', // Direct link to backend
+        baseURL: BACKEND_URL,
       },
     },
   ],
 
-  // Automatically start both servers
   webServer: [
     {
       command: 'npm run dev --workspace=backend',
-      url: 'http://localhost:3001/api/hello',
+      url: `${BACKEND_URL}/api/hello`,
       reuseExistingServer: !process.env.CI,
-      cwd: '../', // Run from the root folder
+      cwd: '../',
     },
     {
       command: 'npm run dev --workspace=frontend',
-      url: 'http://localhost:5173',
+      url: BASE_URL,
       reuseExistingServer: !process.env.CI,
-      cwd: '../', // Run from the root folder
+      cwd: '../',
     },
   ],
 });
