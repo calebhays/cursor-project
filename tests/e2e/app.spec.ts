@@ -1,12 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@testBase';
 
-test('frontend displays backend data', async ({ page }) => {
+test('frontend displays backend data', async ({ testBase }) => {
   // Go to the React app
-  await page.goto('/');
+  await testBase.navigation.navigateToHomePage();
 
   // Wait for the message to change from "Loading..." to the backend message
-  const backendMessage = page.locator('p', { hasText: 'Hello from the Express Backend!' });
-  
-  // Verify it is visible on the screen
-  await expect(backendMessage).toBeVisible();
+  await testBase.pages.onHomePage().verifyWelcomeMessage()
 });

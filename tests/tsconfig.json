@@ -1,19 +1,22 @@
 {
-    "compilerOptions": {
-      "target": "ESNext",
-      "module": "CommonJS",
-      "moduleResolution": "bundler",
-      "esModuleInterop": true,
-      "forceConsistentCasingInFileNames": true,
-      "strict": true,
-      "skipLibCheck": true,
-      "exactOptionalPropertyTypes": false,
-      "types": ["node"]
-    },
-    "include": [
-      "playwright.config.ts",
-      "tsconfig.json",
-      "e2e/**/*.ts",
-      "api/**/*.ts"
-    ]
-  }
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "exactOptionalPropertyTypes": false,
+    "types": ["node", "@playwright/test"],
+    "paths": {
+      "@testBase": ["./testBase.ts"],
+      "@pages/*": ["./pages/*"]
+    }
+  },
+  "include": [
+    "**/*.ts"
+  ]
+}
