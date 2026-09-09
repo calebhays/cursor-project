@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+# Frontend Guidelines
+
+- **Architecture:** Keep UI components presentational where possible. Encapsulate business logic, data fetching, and transformations inside custom hooks or service modules.
+- **State Management:** Keep state as local as possible. Only hoist state to global stores or context when multiple unrelated trees require access.
+- **Styling & Accessibility:** Ensure all interactive elements have accessible roles, labels, and keyboard navigation support. Stick to design system tokens/utility classes.
+- **Performance:** Memoize expensive computations and callbacks passed to deeply nested children. Avoid unnecessary re-renders.
+- **Async Handling:** Always provide loading, error, and empty states for asynchronous operations.

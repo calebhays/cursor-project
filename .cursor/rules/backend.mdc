@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+# Backend Guidelines
+
+- **Architecture:** Maintain clear layer separation: Controllers/Handlers -> Services (Business Logic) -> Repositories/Data Access.
+- **API Design:** Use standard HTTP status codes, consistent JSON response shapes, and clear error envelopes with machine-readable error codes.
+- **Input Validation:** Validate and sanitize all incoming payloads, query parameters, and route parameters before executing business logic.
+- **Database & Transactions:** Always parameterize queries to prevent injection. Use explicit database transactions for multi-step mutations.
+- **Security:** Do not log sensitive user data, secrets, tokens, or PII. Enforce authentication and role-based authorization at the route or controller layer.
