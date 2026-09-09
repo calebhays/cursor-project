@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+# Testing Guidelines
+
+- **Pattern:** Follow the **Arrange-Act-Assert (AAA)** structure with a clean visual separation between steps.
+- **Scope:** Unit tests should test behavior, not implementation details. Mock external services and network requests, not internal helper functions.
+- **Naming:** Use clear, descriptive test names describing the scenario and expected outcome (e.g., `it("returns 400 when email is invalid")`).
+- **Isolation:** Tests must be completely independent and deterministic. Never let state leak across tests; reset databases, mocks, or global state in setup/teardown hooks.
+- **Edge Cases:** Always include test cases for boundary values, empty collections, null/undefined inputs, and network failure responses.

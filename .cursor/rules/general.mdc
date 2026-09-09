@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+# General Guidelines
+
+- Write clean, self-documenting code. Favor readability over clever one-liners.
+- Do not introduce new dependencies without explaining why they are strictly necessary.
+- Follow strict typing: avoid `any`, untyped dictionaries, or implicit types where the language supports static typing.
+- Always handle errors explicitly at network, file, and database boundaries; never silently catch and ignore exceptions.
+- Keep functions small and focused on a single responsibility.
